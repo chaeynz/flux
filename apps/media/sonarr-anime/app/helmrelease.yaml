@@ -74,12 +74,16 @@ spec:
                 drop:
                   - ALL
     persistence:
-      config:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 1Gi
+      config-dir:
+        type: emptyDir
         globalMounts:
           - path: /config
+      config-file:
+        name: sonarr-anime
+        type: secret
+        globalMounts:
+          - path: /config/config.xml
+            subPath: config
       media:
         type: nfs
         path: /mnt/gyro-1/media
